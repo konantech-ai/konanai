@@ -1,0 +1,23 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/install/boost_1_76_0/libs/math/dot_net_example/distribution_explorer/obj
+/work/cache
+/work/data_index
+/work/image
+/work/log
+/work/param
+/.vs/**
+#!/.vs/launch.vs.json
+/kai/.vs
+/kai/kai_engine/x64
+/kai/kai_shell/x64
+/kai/x64
+/out
+/out2
+/docs/html
+/Testing
+/data/movies/prono/file1.avi
+/data/movies/prono/file2.mp4
+/data/movies/prono/file3.mp4

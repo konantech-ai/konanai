@@ -1,0 +1,38 @@
+#pragma once
+
+#include "../../../kai_engine/src/include/kai_api.h"
+
+#include <assert.h>
+
+#define KERR_CHK(call_exp) { KRetCode ret = call_exp; if (ret != KRetOK) { fprintf(stdout, "Kai_cuda error-%d\n", ret); assert(0); } }
+
+enum class test_level { core, brief, detail, full };
+
+class Mission {
+public:
+	Mission(KHSession hSession, enum test_level testLevel);
+	virtual ~Mission();
+
+	virtual void Execute() = 0;
+
+protected:
+	static void ms_dumpStrList(KString sTitle, KStrList slList);
+
+	static bool ms_isMember(KStrList slList, KString sData);
+
+	KString m_to_str(KValue value);
+
+	KString m_encode_esc(KString str);
+
+	KString m_listDescription(KList value);
+	KString m_dictDescription(KDict value);
+	
+	KString m_narrDescription(KHArray hArray);
+	KString m_farrDescription(KHArray hArray);
+
+protected:
+	KHSession m_hSession;
+	enum class test_level m_testLevel;
+	
+	static KString ms_data_root;
+};

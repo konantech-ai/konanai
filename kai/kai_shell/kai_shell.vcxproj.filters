@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{7e442ae0-25c9-4e79-b26b-f57fcb0dcb4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\missions">
+      <UniqueIdentifier>{b2a8b782-6d6a-471d-b108-eb9fd125ce89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{89570a95-6b05-4788-b5fe-ad1dd60ab836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\src\data_feeders">
+      <UniqueIdentifier>{e31fb2ed-197c-4ce6-bd0b-f822ce7284da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\src\reporters">
+      <UniqueIdentifier>{ae6c2d9e-6eda-473f-8fc8-1db6264dcbab}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\kai_shell.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\utils.h">
+      <Filter>소스 파일\src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\mnist_reader.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\urban.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data_feeders\mnist_reader_feeder.h">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data_feeders\urban_feeder.h">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\kvalue_ext.h">
+      <Filter>소스 파일\src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\common.h">
+      <Filter>소스 파일\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data_feeder.h">
+      <Filter>소스 파일\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mission.h">
+      <Filter>소스 파일\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data_feeders\csv_feeder.h">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\abalone.h">
+      <Filter>src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporters\steel_reporter.h">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporter.h">
+      <Filter>소스 파일\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\pulsar.h">
+      <Filter>src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\steel.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\water.h">
+      <Filter>src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data_feeders\folder_class_feeder.h">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\office31.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\flower.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data_feeders\bert_feeder.h">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data_feeders\yolo3_feeder.h">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\bert.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\mini_bert.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\yolo3.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporters\bert_reporter.h">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporters\yolo3_reporter.h">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\json_parser.h">
+      <Filter>소스 파일\src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporters\binary_reporter.h">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporters\mnist_reader_reporter.h">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporters\office31_reporter.h">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporters\select_reporter.h">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reporters\abalone_reporter.h">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\missions\scene_text_detect.h">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\kai_shell.cpp">
+      <Filter>소스 파일\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\utils.cpp">
+      <Filter>소스 파일\src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\kvalue_ext.cpp">
+      <Filter>소스 파일\src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\mnist_reader.cpp">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\urban.cpp">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data_feeders\mnist_reader_feeder.cpp">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data_feeders\urban_feeder.cpp">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data_feeder.cpp">
+      <Filter>소스 파일\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mission.cpp">
+      <Filter>소스 파일\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data_feeders\csv_feeder.cpp">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\abalone.cpp">
+      <Filter>src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporters\steel_reporter.cpp">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporter.cpp">
+      <Filter>소스 파일\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\pulsar.cpp">
+      <Filter>src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\steel.cpp">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\water.cpp">
+      <Filter>src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data_feeders\folder_class_feeder.cpp">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\office31.cpp">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\flower.cpp">
+      <Filter>src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data_feeders\bert_feeder.cpp">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data_feeders\yolo3_feeder.cpp">
+      <Filter>소스 파일\src\data_feeders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\bert.cpp">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\mini_bert.cpp">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\yolo3.cpp">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporters\bert_reporter.cpp">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporters\yolo3_reporter.cpp">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\json_parser.cpp">
+      <Filter>소스 파일\src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporters\binary_reporter.cpp">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporters\mnist_reader_reporter.cpp">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporters\office31_reporter.cpp">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporters\select_reporter.cpp">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reporters\abalone_reporter.cpp">
+      <Filter>소스 파일\src\reporters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\missions\scene_text_detect.cpp">
+      <Filter>소스 파일\src\missions</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

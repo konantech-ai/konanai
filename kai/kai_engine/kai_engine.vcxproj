@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A58FA81A-6CF9-4C04-A468-7CD3F8B5A991}</ProjectGuid>
+    <RootNamespace>kai_cuda</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.3.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;WIN64;KAI_EXPORTS;KAI2021_WINDOWS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(CudaToolkitIncludeDir);$(SolutionDir)..\install\boost_1_76_0;$(SolutionDir)..\install\eigen-3.3.9;$(SolutionDir)..\install\MySQL\Connector C++ 8.0\include;$(SolutionDir)..\install\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(CudaToolkitLibDir);$(SolutionDir)..\install\MySQL\Connector C++ 8.0\lib64\vs14;$(SolutionDir)..\install\opencv\build\$(Platform)\vc14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cudart_static.lib;curand.lib;mysqlcppconn.lib;mysqlcppconn-static.lib;mysqlcppconn8.lib;mysqlcppconn8-static.lib;opencv_world452d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;WIN64;KAI_EXPORTS;KAI2021_WINDOWS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(CudaToolkitIncludeDir);$(SolutionDir)..\install\boost_1_76_0;$(SolutionDir)..\install\eigen-3.3.9;$(SolutionDir)..\install\MySQL\Connector C++ 8.0\include;$(SolutionDir)..\install\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(CudaToolkitLibDir);$(SolutionDir)..\install\MySQL\Connector C++ 8.0\lib64\vs14;$(SolutionDir)..\install\opencv\build\$(Platform)\vc14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cudart_static.lib;curand.lib;mysqlcppconn.lib;mysqlcppconn-static.lib;mysqlcppconn8.lib;mysqlcppconn8-static.lib;opencv_world452.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <CudaCompile>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+    </CudaCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CudaCompile Include="src2020\cuda\cuda_conn.cu" />
+    <CudaCompile Include="src2020\cuda\cuda_datasets\cuda_dataset.cu" />
+    <CudaCompile Include="src2020\cuda\cuda_datasets\cuda_yolo.cu" />
+    <CudaCompile Include="src2020\cuda\cuda_kernels.cu" />
+    <CudaCompile Include="src2020\cuda\cuda_math.cu" />
+    <CudaCompile Include="src2020\cuda\cuda_note.cu" />
+    <CudaCompile Include="src2020\cuda\cuda_util.cu" />
+    <CudaCompile Include="src2020\int_plugin\layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\add_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\attention_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\batch_norm_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\conv_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\custom_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\deconv_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\dropout_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\embedding_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\embed_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\expand_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\extract_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\full_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\merge_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\noise_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\parallel_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\pass_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\pool_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\reshape_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\rnn_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\layers\serial_layer.cu" />
+    <CudaCompile Include="src2020\int_plugin\optimizer.cu" />
+    <CudaCompile Include="src2020\int_plugin\optimizers\adam_optimizer.cu" />
+    <CudaCompile Include="src2020\int_plugin\optimizers\new_optimizer.cu" />
+    <CudaCompile Include="src2020\int_plugin\optimizers\sgd_optimizer.cu" />
+    <CudaCompile Include="src\gpu_cuda\kai_kernels.cu" />
+    <CudaCompile Include="src\math\kcudamath.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src2020\apps\autoencoder.cpp" />
+    <ClCompile Include="src2020\apps\encdec.cpp" />
+    <ClCompile Include="src2020\apps\gan.cpp" />
+    <ClCompile Include="src2020\core\array.cpp" />
+    <ClCompile Include="src2020\core\corpus.cpp" />
+    <ClCompile Include="src2020\core\dataset.cpp" />
+    <ClCompile Include="src2020\core\data_channel.cpp" />
+    <ClCompile Include="src2020\core\dim.cpp" />
+    <ClCompile Include="src2020\core\engine.cpp" />
+    <ClCompile Include="src2020\core\func_timer.cpp" />
+    <ClCompile Include="src2020\core\host_math.cpp" />
+    <ClCompile Include="src2020\core\idx.cpp" />
+    <ClCompile Include="src2020\core\log.cpp" />
+    <ClCompile Include="src2020\core\macro_pack.cpp" />
+    <ClCompile Include="src2020\core\random.cpp" />
+    <ClCompile Include="src2020\core\samples.cpp" />
+    <ClCompile Include="src2020\core\shape.cpp" />
+    <ClCompile Include="src2020\core\shell.cpp" />
+    <ClCompile Include="src2020\core\util.cpp" />
+    <ClCompile Include="src2020\core\value.cpp" />
+    <ClCompile Include="src2020\datasets\abalone.cpp" />
+    <ClCompile Include="src2020\datasets\automata.cpp" />
+    <ClCompile Include="src2020\datasets\bert.cpp" />
+    <ClCompile Include="src2020\datasets\cifar10_auto.cpp" />
+    <ClCompile Include="src2020\datasets\coco.cpp" />
+    <ClCompile Include="src2020\datasets\corpus\korean_news.cpp" />
+    <ClCompile Include="src2020\datasets\corpus\ptb_corpus.cpp" />
+    <ClCompile Include="src2020\datasets\dummy.cpp" />
+    <ClCompile Include="src2020\datasets\flower.cpp" />
+    <ClCompile Include="src2020\datasets\gan_cifar10.cpp" />
+    <ClCompile Include="src2020\datasets\mnist_auto.cpp" />
+    <ClCompile Include="src2020\datasets\mnist_encdec.cpp" />
+    <ClCompile Include="src2020\datasets\mnist_gan.cpp" />
+    <ClCompile Include="src2020\datasets\office31.cpp" />
+    <ClCompile Include="src2020\datasets\pulsar.cpp" />
+    <ClCompile Include="src2020\datasets\steel.cpp" />
+    <ClCompile Include="src2020\datasets\test_dataset.cpp" />
+    <ClCompile Include="src2020\datasets\urbansound.cpp" />
+    <ClCompile Include="src2020\datasets\videoshot.cpp" />
+    <ClCompile Include="src2020\datasets\word2vec.cpp" />
+    <ClCompile Include="src2020\datasets\word_seq.cpp" />
+    <ClCompile Include="src2020\datasets\yolo.cpp" />
+    <ClCompile Include="src2020\int_plugin\internal_plugin.cpp" />
+    <ClCompile Include="src2020\server\client_service.cpp" />
+    <ClCompile Include="src2020\server\connect.cpp" />
+    <ClCompile Include="src2020\utils\news_reformer.cpp" />
+    <ClCompile Include="src2020\utils\test.cpp" />
+    <ClCompile Include="src\api\kai_api_array.cpp" />
+    <ClCompile Include="src\api\kai_api_component.cpp" />
+    <ClCompile Include="src\api\kai_api_dataset.cpp" />
+    <ClCompile Include="src\api\kai_api_expression.cpp" />
+    <ClCompile Include="src\api\kai_api_layer.cpp" />
+    <ClCompile Include="src\api\kai_api_library.cpp" />
+    <ClCompile Include="src\api\kai_api_model.cpp" />
+    <ClCompile Include="src\api\kai_api_model_instance.cpp" />
+    <ClCompile Include="src\api\kai_api_network.cpp" />
+    <ClCompile Include="src\api\kai_api_optimizer.cpp" />
+    <ClCompile Include="src\api\kai_api_shell.cpp" />
+    <ClCompile Include="src\components\component.cpp" />
+    <ClCompile Include="src\components\component_info.cpp" />
+    <ClCompile Include="src\components\kdataloader.cpp" />
+    <ClCompile Include="src\components\kdataset.cpp" />
+    <ClCompile Include="src\components\kexpression.cpp" />
+    <ClCompile Include="src\components\klayer.cpp" />
+    <ClCompile Include="src\components\kmodel.cpp" />
+    <ClCompile Include="src\components\kmodel_instance.cpp" />
+    <ClCompile Include="src\components\knetwork.cpp" />
+    <ClCompile Include="src\components\koptimizer.cpp" />
+    <ClCompile Include="src\exec\callback.cpp" />
+    <ClCompile Include="src\exec\exec_context.cpp" />
+    <ClCompile Include="src\exec\expr_graph.cpp" />
+    <ClCompile Include="src\gpu_cuda\cuda_manager.cpp" />
+    <ClCompile Include="src\gpu_cuda\device_manager.cpp" />
+    <ClCompile Include="src\library\library.cpp" />
+    <ClCompile Include="src\library\local_folder.cpp" />
+    <ClCompile Include="src\library\local_library.cpp" />
+    <ClCompile Include="src\library\object.cpp" />
+    <ClCompile Include="src\library\public_library.cpp" />
+    <ClCompile Include="src\math\karray.cpp" />
+    <ClCompile Include="src\math\karr_math.cpp" />
+    <ClCompile Include="src\math\khostmath.cpp" />
+    <ClCompile Include="src\math\kmath.cpp" />
+    <ClCompile Include="src\math\kshape.cpp" />
+    <ClCompile Include="src\nightly\findfirst.c" />
+    <ClCompile Include="src\nightly\nightly_utils.cpp" />
+    <ClCompile Include="src\nightly\path_generator.cpp" />
+    <ClCompile Include="src\session\callback_manager.cpp" />
+    <ClCompile Include="src\session\kargs.cpp" />
+    <ClCompile Include="src\session\kvalue.cpp" />
+    <ClCompile Include="src\session\session.cpp" />
+    <ClCompile Include="src\shell_temp\session_shell.cpp" />
+    <ClCompile Include="src\utils\kexception.cpp" />
+    <ClCompile Include="src\utils\klogger.cpp" />
+    <ClCompile Include="src\utils\kutil.cpp" />
+    <ClCompile Include="src\utils\kv_util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src2020\apps\autoencoder.h" />
+    <ClInclude Include="src2020\apps\encdec.h" />
+    <ClInclude Include="src2020\apps\gan.h" />
+    <ClInclude Include="src2020\core\array.h" />
+    <ClInclude Include="src2020\core\common.h" />
+    <ClInclude Include="src2020\core\corpus.h" />
+    <ClInclude Include="src2020\core\dataset.h" />
+    <ClInclude Include="src2020\core\data_channel.h" />
+    <ClInclude Include="src2020\core\dim.h" />
+    <ClInclude Include="src2020\core\engine.h" />
+    <ClInclude Include="src2020\core\func_timer.h" />
+    <ClInclude Include="src2020\core\host_math.h" />
+    <ClInclude Include="src2020\core\idx.h" />
+    <ClInclude Include="src2020\core\log.h" />
+    <ClInclude Include="src2020\core\macro_pack.h" />
+    <ClInclude Include="src2020\core\random.h" />
+    <ClInclude Include="src2020\core\samples.h" />
+    <ClInclude Include="src2020\core\shape.h" />
+    <ClInclude Include="src2020\core\shell.h" />
+    <ClInclude Include="src2020\core\util.h" />
+    <ClInclude Include="src2020\core\value.h" />
+    <ClInclude Include="src2020\cuda\cuda_conn.cuh" />
+    <ClInclude Include="src2020\cuda\cuda_kernels.h" />
+    <ClInclude Include="src2020\cuda\cuda_math.h" />
+    <ClInclude Include="src2020\cuda\cuda_note.h" />
+    <ClInclude Include="src2020\cuda\cuda_util.cuh" />
+    <ClInclude Include="src2020\datasets\abalone.h" />
+    <ClInclude Include="src2020\datasets\automata.h" />
+    <ClInclude Include="src2020\datasets\bert.h" />
+    <ClInclude Include="src2020\datasets\cifar10_auto.h" />
+    <ClInclude Include="src2020\datasets\coco.h" />
+    <ClInclude Include="src2020\datasets\corpus\korean_news.h" />
+    <ClInclude Include="src2020\datasets\corpus\ptb_corpus.h" />
+    <ClInclude Include="src2020\datasets\dummy.h" />
+    <ClInclude Include="src2020\datasets\flower.h" />
+    <ClInclude Include="src2020\datasets\gan_cifar10.h" />
+    <ClInclude Include="src2020\datasets\mnist_auto.h" />
+    <ClInclude Include="src2020\datasets\mnist_encdec.h" />
+    <ClInclude Include="src2020\datasets\mnist_gan.h" />
+    <ClInclude Include="src2020\datasets\office31.h" />
+    <ClInclude Include="src2020\datasets\pulsar.h" />
+    <ClInclude Include="src2020\datasets\steel.h" />
+    <ClInclude Include="src2020\datasets\test_dataset.h" />
+    <ClInclude Include="src2020\datasets\urbansound.h" />
+    <ClInclude Include="src2020\datasets\videoshot.h" />
+    <ClInclude Include="src2020\datasets\word2vec.h" />
+    <ClInclude Include="src2020\datasets\word_seq.h" />
+    <ClInclude Include="src2020\datasets\yolo.h" />
+    <ClInclude Include="src2020\int_plugin\internal_plugin.h" />
+    <ClInclude Include="src2020\int_plugin\layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\add_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\attention_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\batch_norm_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\conv_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\custom_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\deconv_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\dropout_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\embedding_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\embed_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\expand_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\extract_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\full_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\merge_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\noise_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\parallel_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\pass_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\pool_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\reshape_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\rnn_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\layers\serial_layer.cuh" />
+    <ClInclude Include="src2020\int_plugin\optimizer.cuh" />
+    <ClInclude Include="src2020\int_plugin\optimizers\adam_optimizer.cuh" />
+    <ClInclude Include="src2020\int_plugin\optimizers\new_optimizer.cuh" />
+    <ClInclude Include="src2020\int_plugin\optimizers\sgd_optimizer.cuh" />
+    <ClInclude Include="src2020\server\client_service.h" />
+    <ClInclude Include="src2020\server\connect.h" />
+    <ClInclude Include="src2020\utils\news_reformer.h" />
+    <ClInclude Include="src2020\utils\test.h" />
+    <ClInclude Include="src\api\kai_api_common.h" />
+    <ClInclude Include="src\components\component.h" />
+    <ClInclude Include="src\components\component_info.h" />
+    <ClInclude Include="src\components\kdataloader.h" />
+    <ClInclude Include="src\components\kdataset.h" />
+    <ClInclude Include="src\components\kexpression.h" />
+    <ClInclude Include="src\components\klayer.h" />
+    <ClInclude Include="src\components\kmodel.h" />
+    <ClInclude Include="src\components\kmodel_instance.h" />
+    <ClInclude Include="src\components\knetwork.h" />
+    <ClInclude Include="src\components\koptimizer.h" />
+    <ClInclude Include="src\exec\callback.h" />
+    <ClInclude Include="src\exec\exec_context.h" />
+    <ClInclude Include="src\exec\expr_graph.h" />
+    <ClInclude Include="src\gpu_cuda\cuda_manager.h" />
+    <ClInclude Include="src\gpu_cuda\device_manager.h" />
+    <ClInclude Include="src\gpu_cuda\kai_kernels.cuh" />
+    <ClInclude Include="src\include\kai_api.h" />
+    <ClInclude Include="src\include\kai_api_shell.h" />
+    <ClInclude Include="src\include\kai_callback.h" />
+    <ClInclude Include="src\include\kai_errors.h" />
+    <ClInclude Include="src\include\kai_types.h" />
+    <ClInclude Include="src\include\kai_value.hpp" />
+    <ClInclude Include="src\library\library.h" />
+    <ClInclude Include="src\library\local_folder.h" />
+    <ClInclude Include="src\library\local_library.h" />
+    <ClInclude Include="src\library\object.h" />
+    <ClInclude Include="src\library\public_library.h" />
+    <ClInclude Include="src\math\karray.h" />
+    <ClInclude Include="src\math\karr_math.h" />
+    <ClInclude Include="src\math\kcudamath.h" />
+    <ClInclude Include="src\math\khostmath.h" />
+    <ClInclude Include="src\math\kmath.h" />
+    <ClInclude Include="src\math\kshape.h" />
+    <ClInclude Include="src\nightly\findfirst.h" />
+    <ClInclude Include="src\nightly\nightly_utils.h" />
+    <ClInclude Include="src\nightly\path_generator.h" />
+    <ClInclude Include="src\session\callback_manager.h" />
+    <ClInclude Include="src\session\kargs.h" />
+    <ClInclude Include="src\session\kcommon.h" />
+    <ClInclude Include="src\session\session.h" />
+    <ClInclude Include="src\utils\kexception.h" />
+    <ClInclude Include="src\utils\klogger.h" />
+    <ClInclude Include="src\utils\kutil.h" />
+    <ClInclude Include="src\utils\kv_util.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.3.targets" />
+  </ImportGroup>
+</Project>

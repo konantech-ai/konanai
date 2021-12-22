@@ -1,0 +1,848 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="src2020\int_plugin\optimizers\adam_optimizer.cu">
+      <Filter>src2020\int_plugin\optimizers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\optimizers\new_optimizer.cu">
+      <Filter>src2020\int_plugin\optimizers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\optimizers\sgd_optimizer.cu">
+      <Filter>src2020\int_plugin\optimizers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\add_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\attention_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\batch_norm_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\conv_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\custom_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\deconv_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\dropout_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\embed_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\embedding_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\expand_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\extract_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\full_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\merge_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\noise_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\parallel_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\pass_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\pool_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\reshape_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\rnn_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layers\serial_layer.cu">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\cuda\cuda_datasets\cuda_dataset.cu">
+      <Filter>src2020\cuda\cuda_datasets</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\cuda\cuda_datasets\cuda_yolo.cu">
+      <Filter>src2020\cuda\cuda_datasets</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\cuda\cuda_conn.cu">
+      <Filter>src2020\cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\cuda\cuda_kernels.cu">
+      <Filter>src2020\cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\cuda\cuda_math.cu">
+      <Filter>src2020\cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\cuda\cuda_note.cu">
+      <Filter>src2020\cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\cuda\cuda_util.cu">
+      <Filter>src2020\cuda</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\layer.cu">
+      <Filter>src2020\int_plugin</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src2020\int_plugin\optimizer.cu">
+      <Filter>src2020\int_plugin</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src\math\kcudamath.cu">
+      <Filter>src\math</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src\gpu_cuda\kai_kernels.cu">
+      <Filter>src\gpu_cuda</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{ffa1ad80-501a-4285-8578-ece03945ea8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{fffc07cf-fe0b-4929-87d3-995b993c9e36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include">
+      <UniqueIdentifier>{7a34b646-a705-4658-9043-a2af4a8e9972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\api">
+      <UniqueIdentifier>{13049413-4a5b-411b-8ad3-db2c2f2df0ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\nightly">
+      <UniqueIdentifier>{b2173506-85fb-433f-9df2-582a6fa90f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\session">
+      <UniqueIdentifier>{fb1a8fec-5463-466e-bead-627dc629c11c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\shell_temp">
+      <UniqueIdentifier>{9f7ff9fe-bc9a-4e2f-868e-0e81451505c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\library">
+      <UniqueIdentifier>{6acedc7e-a61e-4f6f-8b18-7c366fb22902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\math">
+      <UniqueIdentifier>{9685d288-1209-4f71-8e15-5cdb678bfab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\gpu_cuda">
+      <UniqueIdentifier>{71b90feb-2d39-435e-8df5-fe9931b22c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020">
+      <UniqueIdentifier>{e049fb6e-2637-41f5-8525-971a105b83c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\apps">
+      <UniqueIdentifier>{a823673d-dd4f-433d-9b17-2b88cc12e0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\utils">
+      <UniqueIdentifier>{15c09490-3d40-4780-afee-74ca2e5025d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\core">
+      <UniqueIdentifier>{c38b2dc4-7d20-4a33-b79a-8baba3ee984b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\cuda">
+      <UniqueIdentifier>{65d091d2-943c-40c0-8e65-05d47dd768fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\cuda\cuda_datasets">
+      <UniqueIdentifier>{d73479cc-b321-4e3c-8333-0ee60bfbb64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\datasets">
+      <UniqueIdentifier>{e98dd80a-64ef-4495-a571-e9cc49486a50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\datasets\corpus">
+      <UniqueIdentifier>{41d19c4a-cad8-4b2f-8420-41c016ef88f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\server">
+      <UniqueIdentifier>{74c0351f-8750-4c47-ab1a-ae45617f740d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\int_plugin">
+      <UniqueIdentifier>{d23b0e0f-9c6c-4e8c-ba55-37c343c75953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\int_plugin\database">
+      <UniqueIdentifier>{424bc5ac-5dbd-4937-b4e4-841e60886a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\int_plugin\layers">
+      <UniqueIdentifier>{3288342d-b9cd-412b-8c79-8f7d8cecbf7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\int_plugin\multi_board">
+      <UniqueIdentifier>{4f95ea9f-fb58-4037-8d58-38d9dfca2e32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\int_plugin\optimizers">
+      <UniqueIdentifier>{5a37ce41-4e75-4d8d-bb7c-92e8ab9644f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src2020\int_plugin\pipeline">
+      <UniqueIdentifier>{7468f346-0beb-4fbf-b4a7-f488abfb4ec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\exec">
+      <UniqueIdentifier>{814aa669-7f79-4b7c-94d6-794e4a2ab1b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\components">
+      <UniqueIdentifier>{30ce3fd2-af97-4d28-bdef-5d3a3014ca7e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\api\kai_api_library.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_shell.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_dataset.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nightly\path_generator.cpp">
+      <Filter>src\nightly</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\apps\autoencoder.cpp">
+      <Filter>src2020\apps</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\apps\encdec.cpp">
+      <Filter>src2020\apps</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\apps\gan.cpp">
+      <Filter>src2020\apps</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\utils\news_reformer.cpp">
+      <Filter>src2020\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\utils\test.cpp">
+      <Filter>src2020\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\server\client_service.cpp">
+      <Filter>src2020\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\server\connect.cpp">
+      <Filter>src2020\server</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\corpus\korean_news.cpp">
+      <Filter>src2020\datasets\corpus</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\corpus\ptb_corpus.cpp">
+      <Filter>src2020\datasets\corpus</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\abalone.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\automata.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\bert.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\cifar10_auto.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\coco.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\dummy.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\flower.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\gan_cifar10.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\mnist_auto.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\mnist_encdec.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\mnist_gan.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\office31.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\pulsar.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\steel.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\test_dataset.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\urbansound.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\videoshot.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\word_seq.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\word2vec.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\datasets\yolo.cpp">
+      <Filter>src2020\datasets</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\array.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\corpus.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\data_channel.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\dataset.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\dim.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\engine.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\func_timer.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\host_math.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\idx.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\log.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\macro_pack.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\random.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\samples.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\shape.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\shell.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\util.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\core\value.cpp">
+      <Filter>src2020\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\session\kargs.cpp">
+      <Filter>src\session</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\kexception.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\session\session.cpp">
+      <Filter>src\session</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shell_temp\session_shell.cpp">
+      <Filter>src\shell_temp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\library\library.cpp">
+      <Filter>src\library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\library\local_folder.cpp">
+      <Filter>src\library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\library\local_library.cpp">
+      <Filter>src\library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\library\object.cpp">
+      <Filter>src\library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\library\public_library.cpp">
+      <Filter>src\library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpu_cuda\cuda_manager.cpp">
+      <Filter>src\gpu_cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_array.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_expression.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_layer.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_model.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_network.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_optimizer.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\karr_math.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\karray.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\kshape.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\klogger.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\kutil.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\kv_util.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src2020\int_plugin\internal_plugin.cpp">
+      <Filter>src2020\int_plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exec\exec_context.cpp">
+      <Filter>src\exec</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\khostmath.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\kmath.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gpu_cuda\device_manager.cpp">
+      <Filter>src\gpu_cuda</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\component.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\component_info.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\kdataloader.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\kdataset.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\kexpression.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\klayer.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\kmodel.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\knetwork.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\koptimizer.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_model_instance.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\kmodel_instance.cpp">
+      <Filter>src\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\session\kvalue.cpp">
+      <Filter>src\session</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exec\callback.cpp">
+      <Filter>src\exec</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nightly\nightly_utils.cpp">
+      <Filter>src\nightly</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nightly\findfirst.c">
+      <Filter>src\nightly</Filter>
+    </ClCompile>
+    <ClCompile Include="src\api\kai_api_component.cpp">
+      <Filter>src\api</Filter>
+    </ClCompile>
+    <ClCompile Include="src\session\callback_manager.cpp">
+      <Filter>src\session</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exec\expr_graph.cpp">
+      <Filter>src\exec</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\include\kai_errors.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\kai_types.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\kai_api.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\kai_api_shell.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\kai_value.hpp">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\api\kai_api_common.h">
+      <Filter>src\api</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nightly\path_generator.h">
+      <Filter>src\nightly</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\apps\autoencoder.h">
+      <Filter>src2020\apps</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\apps\encdec.h">
+      <Filter>src2020\apps</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\apps\gan.h">
+      <Filter>src2020\apps</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\utils\news_reformer.h">
+      <Filter>src2020\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\utils\test.h">
+      <Filter>src2020\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\server\client_service.h">
+      <Filter>src2020\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\server\connect.h">
+      <Filter>src2020\server</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\optimizers\adam_optimizer.cuh">
+      <Filter>src2020\int_plugin\optimizers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\optimizers\new_optimizer.cuh">
+      <Filter>src2020\int_plugin\optimizers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\optimizers\sgd_optimizer.cuh">
+      <Filter>src2020\int_plugin\optimizers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\add_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\attention_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\batch_norm_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\conv_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\custom_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\deconv_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\dropout_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\embed_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\embedding_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\expand_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\extract_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\full_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\merge_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\noise_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\parallel_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\pass_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\pool_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\reshape_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\rnn_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layers\serial_layer.cuh">
+      <Filter>src2020\int_plugin\layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\corpus\korean_news.h">
+      <Filter>src2020\datasets\corpus</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\corpus\ptb_corpus.h">
+      <Filter>src2020\datasets\corpus</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\abalone.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\automata.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\bert.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\cifar10_auto.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\coco.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\dummy.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\flower.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\gan_cifar10.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\mnist_auto.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\mnist_encdec.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\mnist_gan.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\office31.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\pulsar.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\steel.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\test_dataset.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\urbansound.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\videoshot.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\word_seq.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\word2vec.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\datasets\yolo.h">
+      <Filter>src2020\datasets</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\array.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\common.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\corpus.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\data_channel.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\dataset.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\dim.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\engine.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\func_timer.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\host_math.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\idx.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\log.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\macro_pack.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\random.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\samples.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\shape.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\shell.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\util.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\core\value.h">
+      <Filter>src2020\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\session\kargs.h">
+      <Filter>src\session</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\kexception.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\session\session.h">
+      <Filter>src\session</Filter>
+    </ClInclude>
+    <ClInclude Include="src\session\kcommon.h">
+      <Filter>src\session</Filter>
+    </ClInclude>
+    <ClInclude Include="src\library\library.h">
+      <Filter>src\library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\library\local_folder.h">
+      <Filter>src\library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\library\local_library.h">
+      <Filter>src\library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\library\object.h">
+      <Filter>src\library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\library\public_library.h">
+      <Filter>src\library</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\cuda\cuda_conn.cuh">
+      <Filter>src2020\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\cuda\cuda_kernels.h">
+      <Filter>src2020\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\cuda\cuda_math.h">
+      <Filter>src2020\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\cuda\cuda_note.h">
+      <Filter>src2020\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\cuda\cuda_util.cuh">
+      <Filter>src2020\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gpu_cuda\cuda_manager.h">
+      <Filter>src\gpu_cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\karr_math.h">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\karray.h">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\kshape.h">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\klogger.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\kutil.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\kv_util.h">
+      <Filter>src\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\internal_plugin.h">
+      <Filter>src2020\int_plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\layer.cuh">
+      <Filter>src2020\int_plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="src2020\int_plugin\optimizer.cuh">
+      <Filter>src2020\int_plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exec\exec_context.h">
+      <Filter>src\exec</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\khostmath.h">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\kmath.h">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\kcudamath.h">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gpu_cuda\device_manager.h">
+      <Filter>src\gpu_cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gpu_cuda\kai_kernels.cuh">
+      <Filter>src\gpu_cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\component.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\component_info.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\kdataloader.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\kdataset.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\kexpression.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\klayer.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\kmodel.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\knetwork.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\koptimizer.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\kmodel_instance.h">
+      <Filter>src\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exec\callback.h">
+      <Filter>src\exec</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nightly\nightly_utils.h">
+      <Filter>src\nightly</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nightly\findfirst.h">
+      <Filter>src\nightly</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\kai_callback.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\session\callback_manager.h">
+      <Filter>src\session</Filter>
+    </ClInclude>
+    <ClInclude Include="src\exec\expr_graph.h">
+      <Filter>src\exec</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,495 @@
+#include "abalone.h"
+
+AbaloneMission::AbaloneMission(KHSession hSession, enum test_level testLevel) : Mission(hSession, testLevel) {
+	m_hDataset = 0;
+	m_hDataloader = 0;
+	m_hNetwork = 0;
+}
+
+AbaloneMission::~AbaloneMission() {
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+
+	if (m_hDataset) KERR_CHK(KAI_Dataset_close(m_hSession, m_hDataset));
+	if (m_hDataloader) KERR_CHK(KAI_Dataloader_close(m_hSession, m_hDataloader));
+	if (m_hNetwork) KERR_CHK(KAI_Network_close(m_hSession, m_hNetwork));
+	if (m_hOptimizer) KERR_CHK(KAI_Optimizer_close(m_hSession, m_hOptimizer));
+	if (m_hLossExp) KERR_CHK(KAI_Expression_close(m_hSession, m_hLossExp));
+	if (m_hAccExp) KERR_CHK(KAI_Expression_close(m_hSession, m_hAccExp));
+	if (m_hModel) KERR_CHK(KAI_Model_close(m_hSession, m_hModel));
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+}
+
+void AbaloneMission::Execute() {
+	m_createDataset();
+	m_createDataloader();
+	m_createNetwork();
+	m_createOptimizer();
+	m_createExpressions();
+	m_createModel();
+}
+
+void AbaloneMission::m_createDataset() {
+	if (m_testLevel >= test_level::detail) {
+		KStrList slNames;
+		KERR_CHK(KAI_Dataset_get_builtin_names(m_hSession, &slNames));
+		ms_dumpStrList("Dataset builtin names", slNames);
+		assert(ms_isMember(slNames, "csv_reader"));
+	}
+
+	KDict kwArgs;
+	KList onehot;
+	KList onehotList;
+
+	onehot.push_back(0);
+	onehot.push_back(3);
+
+	onehotList.push_back(onehot);
+
+	kwArgs["name"] = "abalone"; // (KString)"abalone";
+	kwArgs["header_exist"] = true;
+	kwArgs["to_onehot"] = onehotList; // 컬럼 0 정보를 크기 3의 원-핫 벡터로 처리, 실제 데이터가 3가지 값을 갖지 않는 경우 예외 발생
+
+	KERR_CHK(KAI_Dataset_create(m_hSession, &m_hDataset, "csv_reader", kwArgs));
+
+	if (m_testLevel >= test_level::detail) {
+		KString sName;
+		KString sDesc;
+		KString sBuiltin;
+
+		KERR_CHK(KAI_Item_get_str_property(m_hDataset, "name", &sName));
+		KERR_CHK(KAI_Item_get_str_property(m_hDataset, "builtin", &sBuiltin));
+		KERR_CHK(KAI_Item_get_str_property(m_hDataset, "desc", &sDesc));
+		
+		printf("Dataset %s(%s) is created: %s\n", sName.c_str(), sBuiltin.c_str(), sDesc.c_str());
+		
+		KValue hvData;
+
+		KERR_CHK(KAI_Item_get_property(m_hDataset, "data", &hvData));
+		assert(hvData.type() == value_type::vt_array);
+		assert(hvData.arr_type() == array_type::at_float);
+		KERR_CHK(KAI_value_dump(hvData, "Data(before file loading)"));
+	}
+
+	KString sDataFilePath = ms_data_root + "chap01/abalone.csv";
+
+	KERR_CHK(KAI_Dataset_read_file(m_hDataset, sDataFilePath));
+
+	if (m_testLevel >= test_level::detail) {
+		KValue hvData;
+
+		KERR_CHK(KAI_Item_get_property(m_hDataset, "header", &hvData));
+		KERR_CHK(KAI_value_dump(hvData, "Header"));
+
+		KERR_CHK(KAI_Item_get_property(m_hDataset, "data", &hvData));
+		KERR_CHK(KAI_value_dump(hvData, "Data(after file loading)"));
+	}
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+}
+
+void AbaloneMission::m_dumpDataloaderProperties(KString title) {
+	KInt nDatCount, nTrCount, nVaCount, nTeCount;
+	KInt nTrBatchSize, nVaBatchSize, nTeBatchSize;
+	KInt nTrBatchCount, nVaBatchCount, nTeBatchCount;
+
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "dat_count", &nDatCount));
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "tr_count", &nTrCount));
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "va_count", &nVaCount));
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "te_count", &nTeCount));
+
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "tr_batch_size", &nTrBatchSize));
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "va_batch_size", &nVaBatchSize));
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "te_batch_size", &nTeBatchSize));
+
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "tr_batch_count", &nTrBatchCount));
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "va_batch_count", &nVaBatchCount));
+	KERR_CHK(KAI_Item_get_int_property(m_hDataloader, "te_batch_count", &nTeBatchCount));
+
+	printf("Dataloader data count %s: %lld (train: %lld, validate: %lld, test: %lld)\n", title.c_str(), nDatCount, nTrCount, nVaCount, nTeCount);
+	printf("Dataloader batch sizes %s (train: %lld, validate: %lld, test: %lld)\n", title.c_str(), nTrBatchSize, nVaBatchSize, nTeBatchSize);
+	printf("Dataloader batch counts %s (train: %lld, validate: %lld, test: %lld)\n\n", title.c_str(), nTrBatchCount, nVaBatchCount, nTeBatchCount);
+}
+
+void AbaloneMission::m_createDataloader() {
+	if (m_testLevel >= test_level::detail) {
+		KStrList slNames;
+		KERR_CHK(KAI_Dataloader_get_builtin_names(m_hSession, &slNames));
+		ms_dumpStrList("Dataloader builtin names", slNames);
+		assert(ms_isMember(slNames, "plain"));
+	}
+
+	KDict kwArgs;
+
+	kwArgs["name"] = "abalone";
+	
+	kwArgs["tr_ratio"] = 0.8f;
+	kwArgs["va_ratio"] = 0.1f;
+	kwArgs["te_ratio"] = 0.1f;
+
+	kwArgs["tr_batch_size"] = 10;
+	kwArgs["va_batch_size"] = 20;
+	kwArgs["te_batch_size"] = 100;
+
+	kwArgs["input_columns"] = Make_KList("nn", 0, 10);	// [column-0, column-1, ..., column-9]
+	kwArgs["output_columns"] = Make_KList("nn", 10, 1);   // [column-10]
+
+	kwArgs["data_split"] = "sequential";
+
+	KERR_CHK(KAI_Dataloader_create(m_hSession, &m_hDataloader, "plain", kwArgs));
+
+	if (m_testLevel >= test_level::detail) {
+		KString sName;
+		KString sDesc;
+		KString sBuiltin;
+
+		KERR_CHK(KAI_Item_get_str_property(m_hDataloader, "name", &sName));
+		KERR_CHK(KAI_Item_get_str_property(m_hDataloader, "builtin", &sBuiltin));
+		KERR_CHK(KAI_Item_get_str_property(m_hDataloader, "desc", &sDesc));
+
+		printf("Dataloader %s(%s) is created: %s\n\n", sName.c_str(), sBuiltin.c_str(), sDesc.c_str());
+	}
+
+	if (m_testLevel >= test_level::detail) {
+		m_dumpDataloaderProperties("before dataset binding");
+		KERR_CHK(KAI_Item_dump_property(m_hDataloader, "data_index", "data_index before binding"));
+
+		if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+
+		KERR_CHK(KAI_Dataloader_bind(m_hSession, m_hDataloader, m_hDataset));
+
+		if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+
+		m_dumpDataloaderProperties("after dataset binding");
+		KERR_CHK(KAI_Item_dump_property(m_hDataloader, "data_index", "data_index after binding"));
+		KERR_CHK(KAI_Dataloader_shuffle(m_hDataloader));
+		KERR_CHK(KAI_Item_dump_property(m_hDataloader, "data_index", "data_index after shuffling"));
+
+		KERR_CHK(KAI_Dataloader_unbind(m_hSession, m_hDataloader, m_hDataset));
+
+		if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+	}
+
+	if (m_testLevel >= test_level::detail) {
+		m_dumpDataloaderProperties("after dataset unbinding");
+		KERR_CHK(KAI_Item_dump_property(m_hDataloader, "data_index", "data_index after unbinding"));
+	}
+
+	if (m_testLevel >= test_level::detail) {
+		kwArgs.clear();
+		kwArgs["data_split"] = "random";
+
+		KERR_CHK(KAI_Item_set_property(m_hSession, m_hDataloader, kwArgs));
+		KERR_CHK(KAI_Dataloader_bind(m_hSession, m_hDataloader, m_hDataset));
+
+		if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+
+		KERR_CHK(KAI_Item_dump_property(m_hDataloader, "data_index", "data_index after binding (random)"));
+		KERR_CHK(KAI_Dataloader_shuffle(m_hDataloader));
+		KERR_CHK(KAI_Item_dump_property(m_hDataloader, "data_index", "data_index after shuffling (random)"));
+
+		KERR_CHK(KAI_Dataloader_unbind(m_hSession, m_hDataloader, m_hDataset));
+
+		if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+
+		kwArgs["data_split"] = "sequrntial";
+		KERR_CHK(KAI_Item_set_property(m_hSession, m_hDataloader, kwArgs));
+	}
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+}
+
+void AbaloneMission::m_createNetwork() {
+	if (m_testLevel >= test_level::detail) {
+		KStrList slNames;
+		KERR_CHK(KAI_Network_get_builtin_names(m_hSession, &slNames));
+		ms_dumpStrList("Network builtin names", slNames);
+		assert(ms_isMember(slNames, "mlp"));
+	}
+
+	KDict kwArgs;
+
+	kwArgs["name"] = "abalone_mlp";
+
+	kwArgs["widths"] = Make_KList("nn", 16, 4);
+	kwArgs["actfunc"] = "relu";
+	kwArgs["input_shape"] = Make_KList("n", 10);
+	kwArgs["output_shape"] = Make_KList("n", 1);
+	kwArgs["use_output_layer"] = true;
+	kwArgs["init_weight"] = "gaussian";
+	kwArgs["init_std"] = 0.03f;
+
+	KERR_CHK(KAI_Network_create(m_hSession, &m_hNetwork, "mlp", kwArgs));
+
+	if (m_testLevel >= test_level::detail) {
+		KString sName;
+		KString sDesc;
+		KString sBuiltin;
+
+		KERR_CHK(KAI_Item_get_str_property(m_hNetwork, "name", &sName));
+		KERR_CHK(KAI_Item_get_str_property(m_hNetwork, "builtin", &sBuiltin));
+		KERR_CHK(KAI_Item_get_str_property(m_hNetwork, "desc", &sDesc));
+
+		printf("Network %s(%s) is created: %s\n\n", sName.c_str(), sBuiltin.c_str(), sDesc.c_str());
+	}
+
+	if (m_testLevel >= test_level::detail) {
+		m_dumpNetwork(m_hNetwork);
+	}
+
+	KHNetwork hNetwork;
+
+	kwArgs.clear();
+	kwArgs["name"] = "abalone_plain";
+
+	kwArgs["input_shape"] = Make_KList("n", 10);
+	kwArgs["output_shape"] = Make_KList("n", 1);
+	kwArgs["use_output_layer"] = false;
+
+	KERR_CHK(KAI_Network_create(m_hSession, &hNetwork, "", kwArgs));
+
+	static KInt layer_width[3] = { 16, 4, 1 };
+
+	KHLayer hLayers[3];
+
+	for (KInt n = 0; n < 3; n++) {
+		KDict kwArgsLayer;
+
+		kwArgsLayer["width"] = layer_width[n];
+		kwArgsLayer["actfunc"] = (n < 2) ? "relu" : "";
+		kwArgsLayer["init_weight"] = "Xavier";
+
+		KERR_CHK(KAI_Layer_create(m_hSession, &hLayers[n], "dense", kwArgsLayer));
+		KERR_CHK(KAI_Network_append_layer(m_hSession, hNetwork, hLayers[n]));
+	}
+
+	if (m_testLevel >= test_level::detail) {
+		KString sName;
+		KString sDesc;
+		KString sBuiltin;
+
+		KERR_CHK(KAI_Item_get_str_property(hNetwork, "name", &sName));
+		KERR_CHK(KAI_Item_get_str_property(hNetwork, "builtin", &sBuiltin));
+		KERR_CHK(KAI_Item_get_str_property(hNetwork, "desc", &sDesc));
+
+		printf("Network %s(%s) is created: %s\n\n", sName.c_str(), sBuiltin.c_str(), sDesc.c_str());
+	}
+
+	if (m_testLevel >= test_level::detail) {
+		m_dumpNetwork(hNetwork);
+	}
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+
+	KERR_CHK(KAI_Network_close(m_hSession, hNetwork));
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+
+	for (KInt n = 0; n < 3; n++) {
+		KERR_CHK(KAI_Layer_close(m_hSession, hLayers[n]));
+	}
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+}
+
+void AbaloneMission::m_dumpNetwork(KHNetwork hNetwork) {
+	KERR_CHK(KAI_Item_dump_property(hNetwork, "structure", "network structure"));
+
+	KHLayer hLayer;
+
+	KInt nLayerCount;
+
+	KString sName;
+	KString sDesc;
+	KString sBuiltin;
+
+	KERR_CHK(KAI_Network_get_layer_count(m_hSession, hNetwork, &nLayerCount));
+
+	for (KInt n = 0; n < nLayerCount; n++) {
+		KERR_CHK(KAI_Network_get_nth_layer(m_hSession, hNetwork, n, &hLayer));
+
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "name", &sName));
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "builtin", &sBuiltin));
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "desc", &sDesc));
+
+		printf("Layer %lld: %s(%s): %s\n", n, sBuiltin.c_str(), sName.c_str(), sDesc.c_str());
+
+		KString sInShape, sOutShape, sParams, sActFunc, sUseBias, sWeightShape, sBiasShape;
+
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "input_shape", &sInShape));
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "output_shape", &sOutShape));
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "parameters", &sParams));
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "actfunc", &sActFunc));
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "use_bias", &sUseBias));
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "weight_shape", &sWeightShape));
+		KERR_CHK(KAI_Item_get_str_property(hLayer, "bias_shape", &sBiasShape));
+
+		printf("    shape %s=>%s, actfunc: %s\n", sInShape.c_str(), sOutShape.c_str(), sActFunc.c_str());
+		printf("    parameters %s, weight_shape: %s, bias_shape: %s\n\n", sParams.c_str(), sWeightShape.c_str(), sBiasShape.c_str());
+
+		KValue vInShape, vOutShape, vParams, vActFunc, vUseBias, vWeightShape, vBiasShape;
+
+		KERR_CHK(KAI_Item_get_property(hLayer, "input_shape", &vInShape));
+		KERR_CHK(KAI_Item_get_property(hLayer, "output_shape", &vOutShape));
+		KERR_CHK(KAI_Item_get_property(hLayer, "parameters", &vParams));
+		KERR_CHK(KAI_Item_get_property(hLayer, "actfunc", &vActFunc));
+		KERR_CHK(KAI_Item_get_property(hLayer, "use_bias", &vUseBias));
+		KERR_CHK(KAI_Item_get_property(hLayer, "weight_shape", &vWeightShape));
+		KERR_CHK(KAI_Item_get_property(hLayer, "bias_shape", &vBiasShape));
+
+		printf("    (str) shape %s=>%s, actfunc: %s\n", sInShape.c_str(), sOutShape.c_str(), sActFunc.c_str());
+		printf("    (str) parameters %s, weight_shape: %s, bias_shape: %s\n\n", sParams.c_str(), sWeightShape.c_str(), sBiasShape.c_str());
+
+		printf("    (value) shape %s=>%s, actfunc: %s\n", m_to_str(vInShape).c_str(), m_to_str(vOutShape).c_str(), m_to_str(vActFunc).c_str());
+		printf("    (value) parameters %s, weight_shape: %s, bias_shape: %s\n\n", m_to_str(vParams).c_str(), m_to_str(vWeightShape).c_str(), m_to_str(vBiasShape).c_str());
+
+		KERR_CHK(KAI_Item_dump_property(hLayer, "weight", "weight"));
+		KERR_CHK(KAI_Item_dump_property(hLayer, "bias", "bias"));
+	}
+}
+
+void AbaloneMission::m_createOptimizer() {
+	if (m_testLevel >= test_level::detail) {
+		KStrList slNames;
+		KERR_CHK(KAI_Optimizer_get_builtin_names(m_hSession, &slNames));
+		ms_dumpStrList("Optimizer builtin names", slNames);
+		assert(ms_isMember(slNames, "adam"));
+	}
+
+	KDict kwArgs;
+
+	kwArgs["name"] = "abalone_adam";
+
+	kwArgs["ro1"] = 0.9f;
+	kwArgs["ro2"] = 0.999f;
+	kwArgs["epsilon"] = 1.0e-8f;
+
+	kwArgs["learning_rate"] = 0.001f;
+
+	kwArgs["grad_cliping"] = 1.0f;
+
+	KERR_CHK(KAI_Optimizer_create(m_hSession, &m_hOptimizer, "adam", kwArgs));
+
+	if (m_testLevel >= test_level::detail) {
+		KString sName;
+		KString sDesc;
+		KString sBuiltin;
+
+		KERR_CHK(KAI_Item_get_str_property(m_hOptimizer, "name", &sName));
+		KERR_CHK(KAI_Item_get_str_property(m_hOptimizer, "builtin", &sBuiltin));
+		KERR_CHK(KAI_Item_get_str_property(m_hOptimizer, "desc", &sDesc));
+
+		printf("Optimizer %s(%s) is created: %s\n\n", sName.c_str(), sBuiltin.c_str(), sDesc.c_str());
+	}
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+}
+
+void AbaloneMission::m_createExpressions() {
+	if (m_testLevel >= test_level::detail) {
+		KStrList slNames;
+		KERR_CHK(KAI_Expression_get_builtin_names(m_hSession, &slNames));
+		ms_dumpStrList("Expression builtin names", slNames);
+		assert(ms_isMember(slNames, "hungarian"));
+	}
+
+	KDict kwArgs;
+
+	kwArgs["name"] = "abalone_loss";
+	kwArgs["exp"] = "mean(square(sub(@est,@ans)))";
+
+	KERR_CHK(KAI_Expression_create(m_hSession, &m_hLossExp, "hungarian", kwArgs));
+
+	kwArgs["name"] = "abalone_acc";
+	kwArgs["exp"] = "sub(1.0, div(sqrt(mean(square(sub(@est,@ans)))), mean(@ans)))";
+
+	KERR_CHK(KAI_Expression_create(m_hSession, &m_hAccExp, "hungarian", kwArgs));
+
+	if (m_testLevel >= test_level::detail) {
+		m_dumpExpression(m_hLossExp);
+		m_dumpExpression(m_hAccExp);
+	}
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+}
+
+void AbaloneMission::m_dumpExpression(KHExpression hExp) {
+	KString sName;
+	KString sDesc;
+
+	KERR_CHK(KAI_Item_get_str_property(hExp, "name", &sName));
+	KERR_CHK(KAI_Item_get_str_property(hExp, "desc", &sDesc));
+
+	printf("Expression %s is created: %s\n", sName.c_str(), sDesc.c_str());
+
+	m_dumpExpCore(hExp, 0);
+}
+
+void AbaloneMission::m_dumpExpCore(KHExpression hExp, int depth) {
+	KString sOpCode, sOpAux;
+	KInt nOpndCnt;
+
+	KERR_CHK(KAI_Exp_get_operator(hExp, &sOpCode, &sOpAux));
+	printf("    %*s%s(%s)\n", 2*depth, "", sOpCode.c_str(), sOpAux.c_str());
+
+	KERR_CHK(KAI_Exp_get_operand_count(hExp, &nOpndCnt));
+
+	for (KInt n = 0; n < nOpndCnt; n++) {
+		KHExpression hChild;
+		KERR_CHK(KAI_Exp_get_nth_operand(hExp, n, &hChild));
+		m_dumpExpCore(hChild, depth+1);
+	}
+}
+
+void AbaloneMission::m_createModel() {
+	if (m_testLevel >= test_level::detail) {
+		KStrList slNames;
+		KERR_CHK(KAI_Model_get_builtin_names(m_hSession, &slNames));
+		ms_dumpStrList("Model builtin names", slNames);
+		assert(ms_isMember(slNames, "basic"));
+	}
+
+	KDict kwArgs;
+
+	kwArgs["name"] = "abalone";
+
+	kwArgs["dataset"] = m_hDataset;
+	kwArgs["dataloader"] = m_hDataloader;
+	kwArgs["network"] = m_hNetwork;
+	kwArgs["loss_exp"] = m_hLossExp;
+	kwArgs["accuracy_exp"] = m_hAccExp;
+	kwArgs["optimizer"] = m_hOptimizer;
+
+	KERR_CHK(KAI_Model_create(m_hSession, &m_hModel, "basic", kwArgs));
+
+	if (m_testLevel >= test_level::detail) {
+		KString sName;
+		KString sDesc;
+		KString sBuiltin;
+
+		KERR_CHK(KAI_Item_get_str_property(m_hModel, "name", &sName));
+		KERR_CHK(KAI_Item_get_str_property(m_hModel, "builtin", &sBuiltin));
+		KERR_CHK(KAI_Item_get_str_property(m_hModel, "desc", &sDesc));
+
+		printf("Model %s(%s) is created: %s\n\n", sName.c_str(), sBuiltin.c_str(), sDesc.c_str());
+
+		KERR_CHK(KAI_Item_dump_binding_blocks(m_hModel));
+	}
+
+	if (m_testLevel == test_level::full) KERR_CHK(KAI_debug_session_item_dump(m_hSession));
+}
+
+void AbaloneMission::m_executeModel() {
+	KDict kwArgs;
+
+	kwArgs["epoch_count"] = 10;
+	kwArgs["report_epoch"] = 2;
+
+	KERR_CHK(KAI_Model_train(m_hModel, kwArgs));
+	KERR_CHK(KAI_Model_test(m_hModel, kwArgs));
+	KERR_CHK(KAI_Model_visualize(m_hModel, kwArgs));
+
+	KERR_CHK(KAI_Model_execute(m_hModel, kwArgs));
+
+	// predict_test
+}
