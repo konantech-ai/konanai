@@ -1,17 +1,17 @@
 # kai2021
 
-# ÄÄÆÄÀÏ È¯°æ
+# ì»´íŒŒì¼ í™˜ê²½
  * Microsoft Visual Studio Professional 2019
 
-# ÇÊ¼ö ¶óÀÌºê·¯¸® (2021-07-21 ¼öÁ¤)
- * CUDA Toolkit 11.3 Update 1 (¼³Ä¡ ÇÊ¼ö) : https://developer.nvidia.com/cuda-toolkit-archive
- * boost 1.76.0 : https://www.boost.org/users/history/
- * eigen 3.3.9 : http://eigen.tuxfamily.org/index.php?title=Main_Page
+# í•„ìˆ˜ ë¼ì´ë¸ŒëŸ¬ë¦¬ (2021-07-21 ìˆ˜ì •)
+ * CUDA Toolkit 11.3 Update 1 (ì„¤ì¹˜ í•„ìˆ˜) : https://developer.nvidia.com/cuda-toolkit-archive
+ * ~~boost 1.76.0 : https://www.boost.org/users/history/~~
+ * ~~eigen 3.3.9 : http://eigen.tuxfamily.org/index.php?title=Main_Page~~
  * OpenCV 4.5.2 : https://sourceforge.net/projects/opencvlibrary/files/4.5.2/opencv-4.5.2-vc14_vc15.exe/download
  * MySQL Connector C++ 8.0.2 : https://dev.mysql.com/downloads/installer/
 
-# Visual Studio ¿¬µ¿ ½Ã ÁÖÀÇ »çÇ×
- * VS »ó¿¡¼­ GitLab clone ¼öÇà ½Ã, CMakeLists.txt ÆÄÀÏÀÌ Æ÷ÇÔµÈ ¸ğµç ÇÁ·ÎÁ§Æ® Æú´õ¿¡ Ä³½Ã¸¦ »ı¼ºÇÏ¹Ç·Î
-   clone Àü¿¡ ¹İµå½Ã ¾Æ·¡¿Í °°ÀÌ ¼³Á¤ÇØ¾ß ÇÔ
- * Tools > Options > CMake > General > When cache is out of date ¼³Á¤À»
-   "Never run configure step automatically"·Î º¯°æ
+# Visual Studio ì—°ë™ ì‹œ ì£¼ì˜ ì‚¬í•­
+ * ~~VS ìƒì—ì„œ GitLab clone ìˆ˜í–‰ ì‹œ, CMakeLists.txt íŒŒì¼ì´ í¬í•¨ëœ ëª¨ë“  í”„ë¡œì íŠ¸ í´ë”ì— ìºì‹œë¥¼ ìƒì„±í•˜ë¯€ë¡œ
+   clone ì „ì— ë°˜ë“œì‹œ ì•„ë˜ì™€ ê°™ì´ ì„¤ì •í•´ì•¼ í•¨~~
+ * ~~Tools > Options > CMake > General > When cache is out of date ì„¤ì •ì„
+   "Never run configure step automatically"ë¡œ ë³€ê²½
