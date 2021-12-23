@@ -13,5 +13,5 @@
 # Visual Studio 연동 시 주의 사항
  * ~~VS 상에서 GitLab clone 수행 시, CMakeLists.txt 파일이 포함된 모든 프로젝트 폴더에 캐시를 생성하므로
    clone 전에 반드시 아래와 같이 설정해야 함~~
- * ~~Tools > Options > CMake > General > When cache is out of date 설정을
-   "Never run configure step automatically"로 변경
+ * ~~Tools > Options > CMake > General > When cache is out of date 설정을~~
+   ~~"Never run configure step automatically"로 변경~~
